@@ -1,8 +1,8 @@
 import { Suspense, useState } from 'react';
-import { Box, Typography, List } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Transaction, TransactionStatus } from '../../types';
 import { Header } from '../../components/header';
-import { TransactionItem, TransactionEmptyState, TransactionFilters, TransactionSidebar } from '../../features/transactions';
+import { TransactionList, TransactionFilters, TransactionSidebar } from '../../features/transactions';
 import { useSme } from '../../hooks/useSme';
 import { useUsers } from '../../hooks/useUsers';
 import { useTransactions } from '../../hooks/useTransactions';
@@ -29,18 +29,11 @@ function DashboardContent() {
         <TransactionFilters value={statusFilter} onChange={setStatusFilter} />
 
         {data && (
-          <List sx={{ bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
-            {data.data.length === 0 && <TransactionEmptyState />}
-            {data.data.map((transaction: Transaction) => (
-              <TransactionItem
-                key={transaction.id}
-                transaction={transaction}
-                selected={selected?.id === transaction.id}
-                onClick={setSelected}
-                data-testid={`transaction-item-${transaction.id}`}
-              />
-            ))}
-          </List>
+          <TransactionList
+            transactions={data.data}
+            selectedId={selected?.id ?? null}
+            onSelect={setSelected}
+          />
         )}
       </Box>
 
