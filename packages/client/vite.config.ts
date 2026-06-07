@@ -12,4 +12,9 @@ export default defineConfig({
       '@finmid/lib-common': path.resolve(__dirname, '../lib-common/types'),
     },
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/test/setup.ts',
+  },
 });

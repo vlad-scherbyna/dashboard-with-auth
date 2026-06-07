@@ -27,25 +27,27 @@ export default function LoginPage() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        height: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: 'background.default',
+        bgcolor: 'grey.100',
       }}
     >
       <Box
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          width: 360,
+          width: '100%',
+          maxWidth: 400,
+          mx: 2,
           p: 4,
-          borderRadius: 2,
-          boxShadow: 3,
+          borderRadius: 3,
+          boxShadow: 4,
           bgcolor: 'background.paper',
           display: 'flex',
           flexDirection: 'column',
-          gap: 2,
+          gap: 2.5,
         }}
       >
         <Typography variant="h5" sx={{ fontWeight: 700 }}>

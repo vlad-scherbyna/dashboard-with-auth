@@ -18,10 +18,10 @@ function DashboardContent() {
   const { data } = useTransactions(statusFilter);
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.100' }}>
       <Header smeName={sme?.legalName} data-testid="dashboard-header" />
 
-      <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
+      <Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 2, sm: 3, md: 5 }, py: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
           Transactions
         </Typography>
