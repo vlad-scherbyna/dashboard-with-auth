@@ -12,6 +12,9 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
+    "paths": {
+      "@finmid/lib-common": ["../lib-common/types/index.ts"]
+    },
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
