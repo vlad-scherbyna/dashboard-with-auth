@@ -1,9 +1,10 @@
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { TransactionStatus, TransactionStatusEnum } from '../../types';
+import { TransactionStatus } from '../../types';
+import { TransactionFilter, TransactionFilterEnum } from "../../api/transactions";
 
-const FILTERABLE_STATUSES = Object.values(TransactionStatusEnum).filter(
-  (s) => s !== TransactionStatusEnum.Reversed
-) as TransactionStatus[];
+const FILTERABLE_OPTIONS = Object.values(TransactionFilterEnum).filter(
+  (filter) => filter !== TransactionFilterEnum.Reversed
+) as TransactionFilter[];
 
 interface Props {
   value: TransactionStatus | undefined;
@@ -11,17 +12,24 @@ interface Props {
 }
 
 export function TransactionFilters({ value, onChange }: Props) {
+  const activeFilter = value ?? TransactionFilterEnum.All;
+
+  const handleChange = (_event: React.MouseEvent, selectedFilter: TransactionFilter) => {
+    onChange(selectedFilter === TransactionFilterEnum.All ? undefined : selectedFilter as TransactionStatus);
+  };
+
   return (
     <ToggleButtonGroup
-      value={value ?? 'ALL'}
+      value={activeFilter}
       exclusive
-      onChange={(_, v) => onChange(v === 'ALL' ? undefined : v)}
+      onChange={handleChange}
       size="small"
       sx={{ mb: 3, flexWrap: 'wrap', gap: 0.5 }}
     >
-      <ToggleButton value="ALL">All</ToggleButton>
-      {FILTERABLE_STATUSES.map((s) => (
-        <ToggleButton key={s} value={s}>{s}</ToggleButton>
+      {FILTERABLE_OPTIONS.map((filter) => (
+        <ToggleButton key={filter} value={filter}>
+          {filter === TransactionFilterEnum.All ? 'All' : filter}
+        </ToggleButton>
       ))}
     </ToggleButtonGroup>
   );

@@ -1,7 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { getSme } from '../api/sme';
 import { queryKeys } from '../lib/queryKeys';
+import { useError } from '../contexts/error-context';
 
 export function useSme() {
-  return useQuery({ queryKey: queryKeys.sme(), queryFn: getSme });
+  const { setError } = useError();
+
+  return useQuery({
+    queryKey: queryKeys.sme(),
+    queryFn: getSme,
+    throwOnError: (error: Error) => {
+      setError(error);
+      return false;
+    },
+  });
 }

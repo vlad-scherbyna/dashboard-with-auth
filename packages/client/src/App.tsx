@@ -1,16 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './query-client';
 import { AuthProvider, useAuth } from './features/auth';
+import { ErrorProvider } from './contexts/error-context';
+import { ErrorBoundary } from './error';
+import { ErrorSnackbar } from './components/ErrorSnackbar';
 import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/DashboardPage';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 30_000,
-      retry: 1,
-    },
-  },
-});
+import DashboardPage from './pages/dashboard/DashboardPage';
 
 function Router() {
   const { token } = useAuth();
@@ -19,10 +14,15 @@ function Router() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ErrorProvider>
+          <AuthProvider>
+            <Router />
+            <ErrorSnackbar />
+          </AuthProvider>
+        </ErrorProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
