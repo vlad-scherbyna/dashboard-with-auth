@@ -1,13 +1,13 @@
 import { Suspense, useState } from 'react';
 import { Box, Typography, List } from '@mui/material';
 import { Transaction, TransactionStatus } from '../../types';
-import { User } from '../../api/sme';
-import Header from '../../components/Header';
-import { TransactionItem, TransactionFilters, TransactionSidebar } from '../../features/transactions';
+import { Header } from '../../components/header';
+import { TransactionItem, TransactionEmptyState, TransactionFilters, TransactionSidebar } from '../../features/transactions';
 import { useSme } from '../../hooks/useSme';
 import { useUsers } from '../../hooks/useUsers';
 import { useTransactions } from '../../hooks/useTransactions';
-import { DashboardPending } from './DashboardPending';
+import { getUserName } from '../../utils/users';
+import { DashboardPending } from './dashboard-pending';
 
 function DashboardContent() {
   const [statusFilter, setStatusFilter] = useState<TransactionStatus | undefined>(undefined);
@@ -16,9 +16,6 @@ function DashboardContent() {
   const { data: sme } = useSme();
   const { data: users } = useUsers();
   const { data } = useTransactions(statusFilter);
-
-  const getUserName = (userId: string) =>
-    users?.find((user: User) => user.id === userId)?.name;
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
@@ -33,9 +30,7 @@ function DashboardContent() {
 
         {data && (
           <List sx={{ bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
-            {data.data.length === 0 && (
-              <Typography sx={{ p: 3, color: 'text.secondary' }}>No transactions found</Typography>
-            )}
+            {data.data.length === 0 && <TransactionEmptyState />}
             {data.data.map((transaction: Transaction) => (
               <TransactionItem
                 key={transaction.id}
@@ -51,7 +46,7 @@ function DashboardContent() {
 
       <TransactionSidebar
         transaction={selected}
-        userName={selected ? getUserName(selected.userId) : undefined}
+        userName={selected ? getUserName(users, selected.userId) : undefined}
         onClose={() => setSelected(null)}
       />
     </Box>

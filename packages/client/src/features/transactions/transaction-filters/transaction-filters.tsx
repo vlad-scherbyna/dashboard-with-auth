@@ -1,6 +1,7 @@
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { TransactionStatus } from '../../types';
-import { TransactionFilter, TransactionFilterEnum } from "../../api/transactions";
+import { TransactionStatus } from '../../../types';
+import { TransactionFilterEnum } from '../../../api/transactions';
+import type { TransactionFilter } from '../../../api/transactions';
 
 const FILTERABLE_OPTIONS = Object.values(TransactionFilterEnum).filter(
   (filter) => filter !== TransactionFilterEnum.Reversed

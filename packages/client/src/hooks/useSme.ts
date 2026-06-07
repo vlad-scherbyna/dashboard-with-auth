@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getSme } from '../api/sme';
-import { queryKeys } from '../lib/queryKeys';
+import { queryKeys } from '../lib/query-keys';
 import { useError } from '../contexts/error-context';
 
 export function useSme() {

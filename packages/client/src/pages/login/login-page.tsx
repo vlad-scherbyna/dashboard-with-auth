@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Alert, CircularProgress } from '@mui/material';
-import { useAuth } from '../features/auth';
-import { login } from '../api/auth';
+import { useAuth } from '../../features/auth';
+import { login } from '../../api/auth';
 
 export default function LoginPage() {
   const { setToken } = useAuth();

@@ -1,5 +1,5 @@
 import { Snackbar, Alert } from '@mui/material';
-import { useError } from '../contexts/error-context';
+import { useError } from '../../contexts/error-context';
 
 export function ErrorSnackbar() {
   const { error, clearError } = useError();

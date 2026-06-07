@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Button, Box, Skeleton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useAuth } from '../features/auth';
-import { TestAutomation } from '../types/core';
+import { useAuth } from '../../features/auth';
+import { TestAutomation } from '../../types/core';
 
 interface Props extends TestAutomation {
   smeName?: string;

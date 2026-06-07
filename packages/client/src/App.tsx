@@ -3,9 +3,9 @@ import { queryClient } from './query-client';
 import { AuthProvider, useAuth } from './features/auth';
 import { ErrorProvider } from './contexts/error-context';
 import { ErrorBoundary } from './error';
-import { ErrorSnackbar } from './components/ErrorSnackbar';
-import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/dashboard/DashboardPage';
+import { ErrorSnackbar } from './components/error-snackbar';
+import { LoginPage } from './pages/login';
+import { DashboardPage } from './pages/dashboard';
 
 function Router() {
   const { token } = useAuth();
